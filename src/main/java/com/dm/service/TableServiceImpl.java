@@ -17,7 +17,8 @@ import java.util.List;
 public class TableServiceImpl implements TableService {
     @Autowired
     private TableDao tableDao;
-    public DMTable getDMTable(String id) {
+
+    public DMTable getDMTable(Integer id) {
         return tableDao.getDMTable(id);
     }
 
@@ -26,10 +27,11 @@ public class TableServiceImpl implements TableService {
     }
 
     public void addDMTable(DMTable dmTable) {
+        tableDao.addDMTable(dmTable);
 
     }
 
-    public boolean delDMTable(String id) {
+    public boolean delDMTable(Integer id) {
         return tableDao.delDMTable(id);
     }
 

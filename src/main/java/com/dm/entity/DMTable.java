@@ -14,38 +14,38 @@ import javax.persistence.*;
 @Table( name = "T_TABLE")
 public class DMTable {
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @Column(length = 32)
-    private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+//    @Column(length = 32)
+//    private Integer id;
 
     @Column(length = 32)
-    private String POClassName;
+    private String PoClassName;
 
     @Column(length = 32)
-    private String TableName;
+    private String MyTableName;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-
-    public String getPOClassName() {
-        return POClassName;
+    @Column(name="PoClassName", length=32)
+    public String getPoClassName() {
+        return PoClassName;
     }
 
-    public void setPOClassName(String POClassName) {
-        this.POClassName = POClassName;
+    public void setPoClassName(String POClassName) {
+        this.PoClassName = POClassName;
     }
-
+    @Column(name="MyTableName", length=32)
     public String getTableName() {
-        return TableName;
+        return MyTableName;
     }
 
     public void setTableName(String tableName) {
-        TableName = tableName;
+        MyTableName = tableName;
     }
 }

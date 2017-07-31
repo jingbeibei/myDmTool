@@ -1,6 +1,7 @@
 package com.dm.service;
 
 import com.dm.entity.DMTable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,13 +12,13 @@ import java.util.List;
  * Time: 19:24
  */
 public interface TableService {
-    public DMTable getDMTable(String id);
+    public DMTable getDMTable(Integer id);
 
     public List<DMTable> getAllDMTable();
 
     public void addDMTable(DMTable dmTable);
 
-    public boolean delDMTable(String id);
+    public boolean delDMTable(Integer id);
 
     public boolean updateDMTable(DMTable dmTable);
 }

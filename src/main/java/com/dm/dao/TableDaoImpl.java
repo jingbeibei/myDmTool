@@ -19,13 +19,13 @@ public class TableDaoImpl implements TableDao{
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
-    public DMTable getDMTable(String id) {
+    public DMTable getDMTable(Integer id) {
 
 
         String hq = "from DMTable d where d.id=?";
 
         Query query = sessionFactory.getCurrentSession().createQuery(hq);
-        query.setString(0, id);
+        query.setInteger(0,id);
 
         return (DMTable) query.uniqueResult();
     }
@@ -41,7 +41,7 @@ public class TableDaoImpl implements TableDao{
         sessionFactory.getCurrentSession().save(dmTable);
     }
 
-    public boolean delDMTable(String id) {
+    public boolean delDMTable(Integer id) {
         return false;
     }
 

@@ -11,13 +11,13 @@ import java.util.List;
  * Time: 18:58
  */
 public interface TableDao {
-    public DMTable getDMTable(String id);
+    public DMTable getDMTable(Integer id);
 
     public List<DMTable> getAllDMTable();
 
     public void addDMTable(DMTable dmTable);
 
-    public boolean delDMTable(String id);
+    public boolean delDMTable(Integer id);
 
     public boolean updateDMTable(DMTable dmTable);
 }
