@@ -44,7 +44,7 @@ public class TableController {
 //    private CustomerService customerService;
 
     @RequestMapping("/getAllTable")
-    public String getAllUser(HttpServletRequest request) {
+    public String getAllTable(HttpServletRequest request) {
 
         request.setAttribute("tableList", tableService.getAllDMTable());
 
@@ -113,7 +113,7 @@ public class TableController {
     }
 
     @RequestMapping("/updateTable")
-    public String updateUser(DMTable dmTable, HttpServletRequest request) {
+    public String updateTable(DMTable dmTable, HttpServletRequest request) {
 
         if (tableService.updateDMTable(dmTable)) {
             dmTable = tableService.getDMTable(dmTable.getId());
