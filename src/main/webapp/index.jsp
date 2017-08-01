@@ -26,15 +26,19 @@
 <table border="1">
     <tbody>
     <tr>
+        <td>编号</td>
         <th>PO类名</th>
         <th>表名</th>
+        <td>工程名</td>
         <th>操作</th>
     </tr>
     <c:if test="${!empty tableList }">
         <c:forEach items="${tableList }" var="table">
             <tr>
+                <td>${table.id }</td>
                 <td>${table.poClassName }</td>
                 <td>${table.myTableName }</td>
+                <td>${table.projectName }</td>
                 <td>
                     <a href="/myDmTool/table/getTable?id=${table.id }">编辑</a>
                     <a href="javascript:del('${table.id }')">删除</a>

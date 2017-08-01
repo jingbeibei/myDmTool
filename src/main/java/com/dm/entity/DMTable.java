@@ -25,6 +25,9 @@ public class DMTable {
     @Column(length = 32)
     private String MyTableName;
 
+    @Column(length = 32)
+    private String projectName;
+
     public Integer getId() {
         return id;
     }
@@ -47,5 +50,13 @@ public class DMTable {
 
     public void setMyTableName(String tableName) {
         MyTableName = tableName;
+    }
+    @Column(name="projectName", length=32)
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 }

@@ -32,7 +32,7 @@ public class TableDaoImpl implements TableDao{
 
     public List<DMTable> getAllDMTable() {
 
-        String hql = "from DMTable";
+        String hql = "from DMTable order by id desc";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         return query.list();
     }

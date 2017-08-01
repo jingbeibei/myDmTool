@@ -19,10 +19,15 @@
 <form action="" name="userForm">
     <table>
         <tr>
+            <td>工程名：</td>
+            <td><input id="projectName" type="text" name="projectName" size="30"></td>
+        </tr>
+        <tr>
             <td>选择导入数据源：</td>
             <td><input id="path" type="text" name="path" size="30"></td>
             <td><input type=button value="选择" onclick="browseFolder('path')"></td>
         </tr>
+
     </table>
 
 

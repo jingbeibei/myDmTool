@@ -67,32 +67,30 @@ public class TableController {
     @RequestMapping("/addTable")
     public String addTable(DMTable dmTable, HttpServletRequest request) {
         String mypath = request.getParameter("path");
+        String projectName=request.getParameter("projectName");
         List<String> filenames = new ArrayList<String>();
         List<String> tableames = new ArrayList<String>();
 
         getFile(mypath, filenames, tableames);
+        if (filenames != null && tableames != null) {
 
-        int number = filenames.size();
-        int number2 = tableames.size();
-        try {
-            for (int i = 0; i < number; i++) {
-                DMTable dmTable1 = new DMTable();
-                dmTable1.setPoClassName(filenames.get(i));
-                dmTable1.setMyTableName(tableames.get(i));
-                tableService.addDMTable(dmTable1);
+            int number = filenames.size();
+            int number2 = tableames.size();
+            try {
+                for (int i = 0; i < number; i++) {
+                    DMTable dmTable1 = new DMTable();
+                    dmTable1.setPoClassName(filenames.get(i));
+                    dmTable1.setMyTableName(tableames.get(i));
+                    dmTable1.setProjectName(projectName);
+                    tableService.addDMTable(dmTable1);
+                }
+                return "redirect:/table/getAllTable";
+            } catch (Exception e) {
+                return "/error";
             }
-            return "redirect:/table/getAllTable";
-        } catch (Exception e) {
+        } else {
             return "/error";
         }
-//        dmTable.setPoClassName("");
-//        dmTable.setTableName();
-//        try {
-//            tableService.addDMTable(dmTable);
-//            return "redirect:/table/getAllTable";
-//        } catch (Exception e) {
-//            return "/error";
-//        }
     }
 
     @RequestMapping("/delTable")
@@ -132,10 +130,11 @@ public class TableController {
         // 获得该文件夹内的所有文件
         File[] array = file.listFiles();
         FileReader reader = null;
+
         if (array != null) {
 
             for (int i = 0; i < array.length; i++) {
-                if (array[i].isFile())//如果是文件
+                if (array[i].isFile() && array[i].getName().endsWith(".java"))//如果是文件
                 {
                     try {
                         reader = new FileReader(array[i].getPath());
@@ -146,13 +145,15 @@ public class TableController {
                             if (!"".equals(str))
                                 break;
                         }
-                        tablenames.add(str);
+                        if (null != str && !"".equals(str)) {
+                            tablenames.add(str);
+                            filenames.add(array[i].getName().substring(0, array[i].getName().lastIndexOf(".")));
+                        }
                         br.close();
                         reader.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    filenames.add(array[i].getName().substring(0, array[i].getName().lastIndexOf(".")));
 
                 } else if (array[i].isDirectory())//如果是文件夹
                 {
@@ -161,6 +162,38 @@ public class TableController {
                 }
             }
         }
+
+
+        //版本一
+//        if (array != null) {
+//
+//            for (int i = 0; i < array.length; i++) {
+//                if (array[i].isFile())//如果是文件
+//                {
+//                    try {
+//                        reader = new FileReader(array[i].getPath());
+//                        BufferedReader br = new BufferedReader(reader);
+//                        String str = null;
+//                        while ((str = br.readLine()) != null) {
+//                            str = getTableName(str);
+//                            if (!"".equals(str))
+//                                break;
+//                        }
+//                        tablenames.add(str);
+//                        br.close();
+//                        reader.close();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    filenames.add(array[i].getName().substring(0, array[i].getName().lastIndexOf(".")));
+//
+//                } else if (array[i].isDirectory())//如果是文件夹
+//                {
+////                System.out.println(array[i].getName());
+//                    getFile(array[i].getPath(), filenames, tablenames);
+//                }
+//            }
+//        }
     }
 
     private String getTableName(String string) {//获取文件中的表名
