@@ -15,10 +15,8 @@
     </script>
 </head>
 <body>
-<h1>添加用户</h1>
+<h1>添加表</h1>
 <form action="" name="userForm">
-    姓名：<input type="text" name="poClassName">
-    年龄：<input type="text" name="tableName">
     <table>
         <tr>
             <td>选择导入数据源：</td>

@@ -52,11 +52,11 @@ public class TableController {
     }
 
     @RequestMapping("/getTable")
-    public String getUser(Integer id, HttpServletRequest request) {
+    public String getTable(Integer id, HttpServletRequest request) {
 
         request.setAttribute("table", tableService.getDMTable(id));
 
-        return "/editUser";
+        return "/editTable";
     }
 
     @RequestMapping("/toAddTable")
@@ -74,15 +74,25 @@ public class TableController {
 
         int number = filenames.size();
         int number2 = tableames.size();
-
-//        dmTable.setPoClassName("");
-//        dmTable.setTableName();
         try {
-            tableService.addDMTable(dmTable);
+            for (int i = 0; i < number; i++) {
+                DMTable dmTable1 = new DMTable();
+                dmTable1.setPoClassName(filenames.get(i));
+                dmTable1.setMyTableName(tableames.get(i));
+                tableService.addDMTable(dmTable1);
+            }
             return "redirect:/table/getAllTable";
         } catch (Exception e) {
             return "/error";
         }
+//        dmTable.setPoClassName("");
+//        dmTable.setTableName();
+//        try {
+//            tableService.addDMTable(dmTable);
+//            return "redirect:/table/getAllTable";
+//        } catch (Exception e) {
+//            return "/error";
+//        }
     }
 
     @RequestMapping("/delTable")
@@ -122,32 +132,33 @@ public class TableController {
         // 获得该文件夹内的所有文件
         File[] array = file.listFiles();
         FileReader reader = null;
+        if (array != null) {
 
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].isFile())//如果是文件
-            {
-                try {
-                    reader = new FileReader(array[i].getPath());
-                    BufferedReader br = new BufferedReader(reader);
-                    String str = null;
-                    while ((str = br.readLine()) != null) {
-                        str = getTableName(str);
-                        if (!"".equals(str))
-                            break;
+            for (int i = 0; i < array.length; i++) {
+                if (array[i].isFile())//如果是文件
+                {
+                    try {
+                        reader = new FileReader(array[i].getPath());
+                        BufferedReader br = new BufferedReader(reader);
+                        String str = null;
+                        while ((str = br.readLine()) != null) {
+                            str = getTableName(str);
+                            if (!"".equals(str))
+                                break;
+                        }
+                        tablenames.add(str);
+                        br.close();
+                        reader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    tablenames.add(str);
-                    br.close();
-                    reader.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    filenames.add(array[i].getName().substring(0, array[i].getName().lastIndexOf(".")));
 
-                filenames.add(array[i].getName().substring(0, array[i].getName().lastIndexOf(".")));
-
-            } else if (array[i].isDirectory())//如果是文件夹
-            {
+                } else if (array[i].isDirectory())//如果是文件夹
+                {
 //                System.out.println(array[i].getName());
-                getFile(array[i].getPath(), filenames, tablenames);
+                    getFile(array[i].getPath(), filenames, tablenames);
+                }
             }
         }
     }

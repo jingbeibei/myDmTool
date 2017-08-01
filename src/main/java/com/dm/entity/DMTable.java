@@ -41,11 +41,11 @@ public class DMTable {
         this.PoClassName = POClassName;
     }
     @Column(name="MyTableName", length=32)
-    public String getTableName() {
+    public String getMyTableName() {
         return MyTableName;
     }
 
-    public void setTableName(String tableName) {
+    public void setMyTableName(String tableName) {
         MyTableName = tableName;
     }
 }

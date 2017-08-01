@@ -28,7 +28,6 @@ public class TableServiceImpl implements TableService {
 
     public void addDMTable(DMTable dmTable) {
         tableDao.addDMTable(dmTable);
-
     }
 
     public boolean delDMTable(Integer id) {

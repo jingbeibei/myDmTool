@@ -9,7 +9,7 @@
     <title>Insert title here</title>
     <script type="text/javascript">
         function del(id){
-            $.get("/myDmTool/table/delUser?id=" + id,function(data){
+            $.get("/myDmTool/table/delTable?id=" + id,function(data){
                 if("success" == data.result){
                     alert("删除成功");
                     window.location.reload();
@@ -21,22 +21,23 @@
     </script>
 </head>
 <body>
-<h6><a href="/myDmTool/table/toAddTable">添加用户</a></h6>
+<h2><a href="/myDmTool/table/toAddTable">添加表</a>&nbsp;&nbsp;<a href="/myDmTool/table/getAllTable">查看表</a></h2>
+
 <table border="1">
     <tbody>
     <tr>
-        <th>姓名</th>
-        <th>年龄</th>
+        <th>PO类名</th>
+        <th>表名</th>
         <th>操作</th>
     </tr>
     <c:if test="${!empty tableList }">
-        <c:forEach items="${tableList }" var="user">
+        <c:forEach items="${tableList }" var="table">
             <tr>
-                <td>${user.userName }</td>
-                <td>${user.age }</td>
+                <td>${table.poClassName }</td>
+                <td>${table.myTableName }</td>
                 <td>
-                    <a href="/myDmTool/table/getTable?id=${user.id }">编辑</a>
-                    <a href="javascript:del('${user.id }')">删除</a>
+                    <a href="/myDmTool/table/getTable?id=${table.id }">编辑</a>
+                    <a href="javascript:del('${table.id }')">删除</a>
                 </td>
             </tr>
         </c:forEach>

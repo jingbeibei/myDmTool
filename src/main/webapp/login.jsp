@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h5><a href="/Spring-MVC-model/user/getAllUser">进入用户管理页</a></h5>  
+<h5><a href="/myDmTool/table/getAllTable">进入用户管理页</a></h5>
 </body>
 </html>

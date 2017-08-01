@@ -39,13 +39,25 @@ public class TableDaoImpl implements TableDao{
 
     public void addDMTable(DMTable dmTable) {
         sessionFactory.getCurrentSession().save(dmTable);
+//        sessionFactory.getCurrentSession().flush();
     }
 
     public boolean delDMTable(Integer id) {
-        return false;
+
+        String hql = "delete DMTable t where t.id = ?";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.setInteger(0, id);
+
+        return (query.executeUpdate() > 0);
     }
 
     public boolean updateDMTable(DMTable dmTable) {
-        return false;
+        String hql = "update DMTable t set t.PoClassName = ?,t.PoClassName=? where t.id = ?";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.setString(0, dmTable.getPoClassName());
+        query.setString(1, dmTable.getMyTableName());
+        query.setInteger(2, dmTable.getId());
+
+        return (query.executeUpdate() > 0);
     }
 }

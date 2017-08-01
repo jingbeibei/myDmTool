@@ -9,11 +9,11 @@
 <title>Insert title here</title>  
 </head>  
 <body>  
-    <h1>编辑用户</h1>  
-    <form action="/Spring-MVC-model/user/updateUser" name="userForm" method="post">  
-        <input type="hidden" name="id" value="${user.id }">  
-        姓名：<input type="text" name="userName" value="${user.userName }">  
-        年龄：<input type="text" name="age" value="${user.age }">  
+    <h1>编辑表</h1>
+    <form action="/myDmTool/table/updateTable" name="tableForm" method="post">
+        <input type="hidden" name="id" value="${table.id }">
+       PO类名：<input type="text" name="poClassName" value="${table.poClassName }">
+        表名：<input type="text" name="myTableName" value="${table.myTableName }">
         <input type="submit" value="编辑" >  
     </form>  
 </body>  
